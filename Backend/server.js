@@ -1,14 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import authRoute from "./routes/auth.js";
-import usersRoute from "./routes/users.js";
-import hotelsRoute from "./routes/house.js";
-import roomsRoute from "./routes/rent.js";
-import cors from "cors";
+
+// import authRoute from "./routes/auth.js";
+// import usersRoute from "./routes/users.js";
+// import houseRoute from "./routes/house.js";
+// import rentRoute from "./routes/rent.js";
 
 const app = express();
 dotenv.config();
+
+mongoose.set("strictQuery", false);
 
 const connect = async () => {
   try {
@@ -24,13 +26,13 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //middlewares
-app.use(cors())
 app.use(express.json());
 
-app.use("/api/auth", authRoute);
-app.use("/api/users", usersRoute);
-app.use("/api/house", houseRoute);
-app.use("/api/rent", rentRoute);
+// Adding routes
+// app.use("/api/auth", authRoute);
+// app.use("/api/users", usersRoute);
+// app.use("/api/house", houseRoute);
+// app.use("/api/rent", rentRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
